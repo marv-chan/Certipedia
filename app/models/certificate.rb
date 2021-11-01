@@ -16,4 +16,6 @@ class Certificate < ActiveRecord::Base
       subject_list = Certificate.all_subjects
     end
     return Certificate.where(school: school_list, subject: subject_list).order(order)
+  end
+  
 end
