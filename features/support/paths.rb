@@ -15,7 +15,7 @@ module NavigationHelpers
 
     when /^home page$/ then '/courses'
 
-    when /^new page$/ then 'movies/new'
+    when /^new page$/ then 'courses/new'
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
