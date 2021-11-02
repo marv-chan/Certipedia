@@ -1,13 +1,17 @@
-<h2>Create New Movie</h2>
+<!-- new code-->
+<h2>Create New Certification </h2>
 
-<%= form_tag movies_path, :class => 'form' do %>
-  <%= label :movie, :title, 'Title', :class => 'col-form-label' %>
-  <%= text_field :movie, :title, :class => 'form-control' %>
-  <%= label :movie, :rating, 'Rating', :class => 'col-form-label'  %>
-  <%= select :movie, :rating, ['G','PG','PG-13','R','NC-17'], {}, {:class => 'form-control col-1'} %>
-  <%= label :movie, :release_date, 'Released On', :class => 'col-form-label'  %>
-  <%= date_select :movie, :release_date, {}, :class => 'form-control col-2 d-inline' %>
+<%= form_tag certificates_path, :class => 'form' do %>
+  <%= label :certificate, :name, 'Name', :class => 'col-form-label' %>
+  <%= text_field :certificate, :name, :class => 'form-control' %>
+  <%= label :certificate, :program, 'Program', :class => 'col-form-label' %>
+  <%= text_field :certificate, :program, :class => 'form-control' %>
+  <%= label :certificate, :website, 'Website', :class => 'col-form-label' %>
+  <%= text_field :certificate, :website, :class => 'form-control' %>
+  <%= label :certificate, :school, 'School', :class => 'col-form-label'  %>
+  <%= select :certificate, :school, ['New York University','Cornell University','Columbia University'], {}, {:class => 'form-control col-1'} %>
+  
   <br/>
   <%= submit_tag 'Save Changes', :class => 'btn btn-primary' %>
-  <%= link_to 'Cancel', movies_path, :class => 'btn btn-secondary' %>
+  <%= link_to 'Cancel', certificates_path, :class => 'btn btn-secondary' %>
 <% end %>
