@@ -11,13 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20211101065825) do
+ActiveRecord::Schema.define(version: 20211102014614) do
 
   create_table "certificates", force: :cascade do |t|
-    t.string "name"
-    t.string "school"
-    t.string "subject"
-    t.string "website"
+    t.string   "name"
+    t.string   "school"
+    t.string   "subject"
+    t.string   "website"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end
