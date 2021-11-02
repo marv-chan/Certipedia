@@ -1,34 +1,36 @@
 <!--  This file is app/views/certificates/index.html.erb -->
+<br>
 <h2>All Certificates</h2>
-
+<br>
 <%#  Part 2: Start here... %>
 
-<table class="table table-striped col-md-12" id="certificates">
-  <thead>
+<table class="table col-md-12" id="certificates">
+  <thead class="table-dark">
     <tr>
-      <th>Movie Title</th>
-      <th>Rating</th>
-      <th>Release Date</th>
-      <th>More Info</th>
+      <th>Certification Name</th>
+      <th>School</th>
+      <th>Subject Area</th>
+      <th>More Information</th>
     </tr>
   </thead>
-  <tbody>
+  <tbody class="table-light">
     <% @certificates.each do |certificate| %>
       <tr>
-        <td>
+        <td class="h6">
           <%= certificate.name %>
         </td>
-        <td>
+        <td class="h6">
           <%= certificate.school %>
         </td>
-        <td>
+        <td class="h6">
           <%= certificate.subject %>
         </td>
-        <td>
-          <%= link_to "More about #{certificate.name}", certificate_path(certificate) %>
+        <td class="h6">
+          <%= link_to "More about #{certificate.name}", certificate_path(certificate) ,class: "btn btn-outline-secondary col-12"%>
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
+
 <%= link_to 'Add new certificate', new_certificate_path, :class => 'btn btn-primary' %>
