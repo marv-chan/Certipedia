@@ -1,0 +1,34 @@
+<!--  This file is app/views/certificates/index.html.erb -->
+<h2>All Certificates</h2>
+
+<%#  Part 2: Start here... %>
+
+<table class="table table-striped col-md-12" id="certificates">
+  <thead>
+    <tr>
+      <th>Movie Title</th>
+      <th>Rating</th>
+      <th>Release Date</th>
+      <th>More Info</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @certificates.each do |certificate| %>
+      <tr>
+        <td>
+          <%= certificate.name %>
+        </td>
+        <td>
+          <%= certificate.school %>
+        </td>
+        <td>
+          <%= certificate.subject %>
+        </td>
+        <td>
+          <%= link_to "More about #{certificate.name}", certificate_path(certificate) %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= link_to 'Add new certificate', new_certificate_path, :class => 'btn btn-primary' %>
