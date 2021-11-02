@@ -12,4 +12,3 @@ class CreateCertificates < ActiveRecord::Migration
     drop_table :certificates
 end
 end 
-
