@@ -1,4 +1,4 @@
-class CertificateController < ApplicationController
+class CertificatesController < ApplicationController
 
   def show
     id = params[:id]

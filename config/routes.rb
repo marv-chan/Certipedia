@@ -1,5 +1,5 @@
-Rottenpotatoes::Application.routes.draw do
-  resources :movies
-  # map '/' to be a redirect to '/movies'
-  root :to => redirect('/movies')
+Certipedia::Application.routes.draw do
+  resources :certificates
+  # map '/' to be a redirect to '/certificates'
+  root :to => redirect('/certificates')
 end
