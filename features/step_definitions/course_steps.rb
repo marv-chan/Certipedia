@@ -1,7 +1,7 @@
 
-Given /the following courses exist/ do |course_table|
+Given /the following certificates exist/ do |course_table|
   course_table.hashes.each do |course|
-    Course.create course
+    Certificate.create course
   end
 end
 
