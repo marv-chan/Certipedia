@@ -1,0 +1,25 @@
+<!--  app/views/movies/show.html.erb -->
+<h2><%= @certificate.name %> </h2>
+<br>
+<ul id="details">
+  <li>
+     <h5>School: </h5> <%= @certificate.school %>
+    
+  </li> 
+  <br>
+  <li>
+    <h5>Program: </h5>
+    <p id="description">
+    <%= @certificate.subject %>
+    </p>
+  </li>
+
+  <li>
+    <h5>Program Website: </h5>
+    <p id="description">
+    <%= @certificate.website %>
+    </p>
+  </li>
+  
+   
+</ul> 

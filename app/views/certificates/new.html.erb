@@ -1,0 +1,17 @@
+<!-- new code-->
+<h2>Create New Certification </h2>
+
+<%= form_tag certificates_path, :class => 'form' do %>
+  <%= label :certificate, :name, 'Name', :class => 'col-form-label' %>
+  <%= text_field :certificate, :name, :class => 'form-control' %>
+  <%= label :certificate, :program, 'Program', :class => 'col-form-label' %>
+  <%= text_field :certificate, :program, :class => 'form-control' %>
+  <%= label :certificate, :website, 'Website', :class => 'col-form-label' %>
+  <%= text_field :certificate, :website, :class => 'form-control' %>
+  <%= label :certificate, :school, 'School', :class => 'col-form-label'  %>
+  <%= select :certificate, :school, ['New York University','Cornell University','Columbia University'], {}, {:class => 'form-control col-1'} %>
+  
+  <br/>
+  <%= submit_tag 'Save Changes', :class => 'btn btn-primary' %>
+  <%= link_to 'Cancel', certificates_path, :class => 'btn btn-secondary' %>
+<% end %>
