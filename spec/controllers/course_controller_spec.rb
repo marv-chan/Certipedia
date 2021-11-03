@@ -52,7 +52,7 @@ RSpec.describe CertificatesController, type: :controller do
     cert =   Certificate.create(:school => "Cornell University", :name => "NoSQL",
                          :subject => "Computer Science", :website => "http://test.com")
 
-    it 'should render the index template' do
+    it ' render the index' do
       get :index
       expect(response).to render_template('index')
     Certificate.find_by(:school => "Cornell University").destroy
@@ -67,7 +67,7 @@ RSpec.describe CertificatesController, type: :controller do
       get :edit, id: cert.id
     end
 
-    it 'should find the movie' do
+    it 'find the cert' do
       expect(assigns(:certificate)).to eql(cert)
     end
 
@@ -79,9 +79,9 @@ RSpec.describe CertificatesController, type: :controller do
 
 
   describe 'GET new' do
-    movie = Certificate.new
+    cert = Certificate.new
 
-    it 'should render the new template' do
+    it 'render new' do
       get :new
       expect(response).to render_template('new')
     end
@@ -95,11 +95,11 @@ RSpec.describe CertificatesController, type: :controller do
     get :show, id: cert.id
   end
 
-  it 'should find the movie' do
+  it 'should find the cert' do
     expect(assigns(:certificate)).to eql(cert)
   end
 
-  it 'should render the show template' do
+  it 'render show' do
     expect(response).to render_template('show')
   end
   Certificate.find_by(:school => "Cornell University").destroy
@@ -113,21 +113,16 @@ describe 'PUT update' do
     put :update, id: cert.id,  :certificate => {:name => "Modified"}
   end
 
-  it 'updates an existing movie' do
+  it 'updates a cert' do
     cert.reload
     expect(cert.name).to eql('Modified')
   end
 
-  it 'redirects to the movie page' do
+  it 'redirects to the cert page' do
     expect(response).to redirect_to(certificate_path(cert))
   end
   Certificate.find_by(:school => "Cornell University").destroy
 end
-
-
-
-
-
 
 
 end

@@ -13,7 +13,7 @@ RSpec.describe Certificate, type: :model do
 end
 
   describe "filter" do
-    it "returns all movies if no filter added" do
+    it "returns all certs if no filter added" do
       certs = Certificate.with_filter([],[],0)
       all_certs = Certificate.where(school: Certificate.all_schools, subject: Certificate.all_subjects)
       expect(certs.length()).to eq all_certs.length
@@ -21,7 +21,7 @@ end
   end
 
   describe "filter" do
-    it "returns correctly filtered movies" do
+    it "returns correctly filtered certs" do
       certs = Certificate.with_filter(["Cornell University"],[],0)
       correct_certs = all_certs = Certificate.where(school: ['Cornell University'], subject: Certificate.all_subjects)
       expect(certs.length()).to eq correct_certs.length()
