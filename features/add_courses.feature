@@ -14,7 +14,7 @@ Scenario: add course to database
   Given I am on new page
   And I select "Columbia University" from "School"
   And I fill in "Name" with "C++"
-  And I fill in "Program" with "Computer Science"
+  And I fill in "Subject" with "Computer Science"
   And I fill in "Website" with "http://nothing.com"
   And I press "Save Changes"
   Then I should be on home page
@@ -27,7 +27,7 @@ Scenario: add course to without website should work
   Given I am on new page
   And I select "New York University" from "School"
   And I fill in "Name" with "Dostoevsky"
-  And I fill in "Program" with "Russian"
+  And I fill in "Subject" with "Russian"
   And I press "Save Changes"
   Then I should be on home page
   And I should see "Dostoevsky"

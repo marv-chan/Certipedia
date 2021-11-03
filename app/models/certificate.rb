@@ -12,10 +12,10 @@ class Certificate < ActiveRecord::Base
     if school_list == []
       school_list = Certificate.all_schools
     end
-    if subject == []
+    if subject_list == []
       subject_list = Certificate.all_subjects
     end
-    return Certificate.where(school: school_list, subject: subject_list).order(order)
+    return Certificate.where(school: school_list, subject: subject_list)
   end
-  
+
 end
