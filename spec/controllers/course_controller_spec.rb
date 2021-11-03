@@ -115,11 +115,11 @@ describe 'PUT update' do
 
   it 'updates an existing movie' do
     cert.reload
-    expect(movie1.title).to eql('Modified')
+    expect(cert.name).to eql('Modified')
   end
 
   it 'redirects to the movie page' do
-    expect(response).to redirect_to(movie_path(cert))
+    expect(response).to redirect_to(certificate_path(cert))
   end
   Certificate.find_by(:school => "Cornell University").destroy
 end
