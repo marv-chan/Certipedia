@@ -6,15 +6,29 @@ Feature: add courses to database
 
 Scenario: navigate to add course page
   Given I am on home page
-  When I follow "Add Course"
-  Then I should see "Add Course"
+  When I follow "Add new certificate"
+  Then I should see "Create New Certification"
 
 
 Scenario: add course to database
   Given I am on new page
-  And I fill in "University" with "Columbia"
-  And I fill in "Department" with "Computer Science"
-  And I fill in "Application Deadline" with "January 15, 2022"
-  And I press "Add Course"
-  Then I should be on the home page
-  And I should see "Columbia"
+  And I select "Columbia University" from "School"
+  And I fill in "Name" with "C++"
+  And I fill in "Subject" with "Computer Science"
+  And I fill in "Website" with "http://nothing.com"
+  And I press "Save Changes"
+  Then I should be on home page
+  And I should see "C++"
+  And I should see "Computer Science"
+  And I should see "C++ was successfully created"
+
+
+Scenario: add course to without website should work
+  Given I am on new page
+  And I select "New York University" from "School"
+  And I fill in "Name" with "Dostoevsky"
+  And I fill in "Subject" with "Russian"
+  And I press "Save Changes"
+  Then I should be on home page
+  And I should see "Dostoevsky"
+  And I should see "Russian"
