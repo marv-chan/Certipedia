@@ -11,13 +11,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20211101065825) do
+ActiveRecord::Schema.define(version: 20211111182507) do
+
+  create_table "bookmarks", force: :cascade do |t|
+    t.integer  "users_id"
+    t.integer  "certificates_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "certificates", force: :cascade do |t|
-    t.string "name"
-    t.string "school"
-    t.string "subject"
-    t.string "website"
+    t.string   "name"
+    t.string   "school"
+    t.string   "subject"
+    t.string   "website"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string   "name"
+    t.string   "username"
+    t.string   "password"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end
