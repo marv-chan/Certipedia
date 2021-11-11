@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20211111182507) do
+ActiveRecord::Schema.define(version: 20211111190100) do
 
   create_table "bookmarks", force: :cascade do |t|
     t.integer  "users_id"
@@ -25,6 +25,15 @@ ActiveRecord::Schema.define(version: 20211111182507) do
     t.string   "school"
     t.string   "subject"
     t.string   "website"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.integer  "users_id"
+    t.integer  "certificates_id"
+    t.integer  "rating"
+    t.string   "review"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
