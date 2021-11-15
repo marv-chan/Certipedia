@@ -3,16 +3,36 @@
 <h2>All Certificates</h2>
 <br>
 <%#  Part 2: Start here... %>
+<style>
+.hilite{
+  background-color: grey;
+}
+</style>
 
 <table class="table col-md-12" id="certificates">
   <thead class="table-dark">
     <tr>
-      <th>Certification Name</th>
+      <th>
+        <%= link_to 'Certificate Name', certificates_path(:sort => 'name'), id:'name_header', class:@name_header %>
+      </th>
       <th>School</th>
-      <th>Subject Area</th>
+      <th>
+        <%= link_to 'Subject Area', certificates_path(:sort => 'subject'), id:'subject_header', class:@subject_header %>
+      </th>
       <th>More Information</th>
     </tr>
   </thead>
+  <%= form_tag certificates_path, method: :get, id: 'schools_form' do %>
+  Include:
+  <% @all_schools.each do |school| %>
+    <div class="form-check  form-check-inline">
+      <%= label_tag "schools[#{school}]", school, class: 'form-check-label' %>
+      <%= check_box_tag "schools[#{school}]", "1",  @schools_to_show.include?(school), class: 'form-check-input', id: "schools_#{school}" %>
+    </div>
+  <% end %>
+  <%= submit_tag 'Refresh', id: 'schools_submit', class: 'btn btn-dark btn-sm' %>
+<% end %>
+
   <tbody class="table-light">
     <% @certificates.each do |certificate| %>
       <tr>
