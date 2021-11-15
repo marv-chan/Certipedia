@@ -2,14 +2,14 @@ class UsersController < ApplicationController
    skip_before_action :require_login, only: [:new, :create]
 
   def show
-  #  print(params)
     uname = session[:username]
-    @user = User.where(:username => uname).first
-    print(@user)
+    @user = User.find(params[:id])
+    if @user.username != uname
+      flash[:notice] = 'You do not have permission to view this page'
+        redirect_to new_user_path
+        return
+    end
     @courses = User.bookmarked_courses
-
-
-
   end
 
   def index
@@ -46,7 +46,7 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @yser = User.find params[:id]
+    @user = User.find params[:id]
   end
 
 
@@ -55,7 +55,5 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:name, :username, :password)
   end
-
-
 
 end

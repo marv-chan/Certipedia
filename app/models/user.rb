@@ -10,8 +10,7 @@ class User < ActiveRecord::Base
     uname = params[:username]
     pword = params[:password]
     name = params[:name]
-    print(uname)
-    @found_user = User.where(:username => uname,:password =>pword,:name => name)
+    @found_user = User.where(username: uname, password: pword, name: name)
     if @found_user.empty?
       return false
     end
