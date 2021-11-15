@@ -4,8 +4,8 @@
 <ul id="details">
   <li>
      <h5>School: </h5> <%= @certificate.school %>
-    
-  </li> 
+
+  </li>
   <br>
   <li>
     <h5>Program: </h5>
@@ -20,6 +20,14 @@
     <%= @certificate.website %>
     </p>
   </li>
-  
-   
-</ul> 
+
+
+  <li>
+    <h5>Add to Bookmarks </h5>
+    <p id="bookmarks">
+    <%= link_to 'Create Bookmark', new_certificate_bookmark_path(:certificate_id => @certificate.id), :class => 'btn btn-dark'%>
+    </p>
+  </li>
+
+
+</ul>

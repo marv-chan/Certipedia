@@ -13,6 +13,9 @@ class CertificatesController < ApplicationController
     # default: render 'new' template
   end
 
+
+
+
   def create
     @certificate = Certificate.create!(certificate_params)
     flash[:notice] = "#{@certificate.name} was successfully created."
