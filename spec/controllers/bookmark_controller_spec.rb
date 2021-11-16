@@ -39,13 +39,9 @@ RSpec.describe BookmarksController, type: :controller do
       expect(flash[:notice]).to match(/Added bookmark for course #{cert.name} !/)
       expect(response).to render_template('index')
       Certificate.find_by(:school => "Cornell University").destroy
-      User.find_by(:name => "Alexander").destroy
+
 
   end
   end
-  after(:all) do
-    User.all.each {|user|
-      user.destroy
-  }
-  end
+
 end
