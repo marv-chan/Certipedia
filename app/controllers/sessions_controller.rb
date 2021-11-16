@@ -2,6 +2,7 @@ class SessionsController < ApplicationController
 
   def new
     if session[:username] != nil
+      print(session[:username])
       @user = User.where(username: session[:username]).first
       redirect_to @user
     end

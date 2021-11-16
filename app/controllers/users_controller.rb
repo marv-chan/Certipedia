@@ -33,6 +33,7 @@ class UsersController < ApplicationController
     if @user.empty?
       @user = User.make_new_user(user_params)
       flash[:notice] = 'User was created'
+      session[:username] = @user.username
       redirect_to new_session_path
     else
       flash[:notice] = 'Username already exists'
