@@ -35,17 +35,13 @@ RSpec.describe BookmarksController, type: :controller do
                    :password => "password1")
 
 
-      get(:new, certificate_id: cert.id,username: user.username  )
+      get :new, {certificate_id: cert.id} ,{username: user.username}  
       expect(flash[:notice]).to match(/Added bookmark for course #{cert.name} !/)
       expect(response).to render_template('index')
       Certificate.find_by(:school => "Cornell University").destroy
-      User.find_by(:name => "Alexander").destroy
+
 
   end
   end
-  after(:all) do
-    User.all.each {|user|
-      user.destroy
-  }
-  end
+
 end

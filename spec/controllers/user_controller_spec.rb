@@ -46,8 +46,7 @@ RSpec.describe UsersController, type: :controller do
 
 
   describe 'GET show' do
-  #  user = User.create(:name => "Nidhi", :username => "test4",
-  #                :password => "password4")
+
   user = User.create(:name => "Alex", :username => "new",
                 :password => "password5")
   print(user.name)
