@@ -24,7 +24,7 @@ RSpec.describe UsersController, type: :controller do
   describe 'GET index' do
     user = User.create(:name => "Alexander", :username => "test3",
                   :password => "password3")
-    print(user.name)
+
 
     it ' rendirect to show' do
       get :index
@@ -46,23 +46,26 @@ RSpec.describe UsersController, type: :controller do
 
 
   describe 'GET show' do
-    user = User.create(:name => "Nidhi", :username => "test4",
-                  :password => "password4")
-    print(user)
+
+  user = User.create(:name => "Alex", :username => "new",
+                :password => "password5")
+  print(user.name)
+#  user = User.where(:name => 'Alexander').first
   before(:each) do
-    get :show, id: user.id, username: user.username
+    get :show, {id: user.id}, {username: user.username}
   end
   #print(user.id)
 
 
   it 'should find the user' do
+    print(user)
+    print(@user)
     expect(assigns(:user)).to eql(user)
   end
 
   it 'render show' do
     expect(response).to render_template('show')
   end
-  User.find_by(:name => "Nidhi").destroy
 end
 
   after(:all) do
