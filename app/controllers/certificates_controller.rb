@@ -24,7 +24,6 @@ class CertificatesController < ApplicationController
       switch = true
     else 
       @schools_to_show = Hash[@all_schools.map {|v| [v,1]}]
-      switch = true
     end
 
     if switch
