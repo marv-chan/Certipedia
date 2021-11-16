@@ -12,10 +12,8 @@ class Bookmark < ActiveRecord::Base
     return @bookmarks
   end
 
-
-  #this fails, I have tried user and users and tried changing the schema 
-  def self.add_bookmark(user, course)
-    @bookmark = Bookmark.create!(:users => user, :certificates=> course)
+  def self.add_bookmark(user, certificate)
+    @bookmark = Bookmark.create(:users_id => user.id, :certificates_id => certificate.id)
   end
 
 end

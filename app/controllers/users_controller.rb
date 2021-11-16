@@ -1,11 +1,11 @@
 class UsersController < ApplicationController
-   skip_before_action :require_login, only: [:new, :create]
+   before_action :require_login, only: [:show]
 
   def show
     uname = session[:username]
-    User.all.each do |u|
-      print u.name
-    end
+    #User.all.each do |u|
+    #  print u.name
+    #end
     @user = User.find(params[:id])
     if @user.username != uname
       flash[:notice] = 'You do not have permission to view this page'
