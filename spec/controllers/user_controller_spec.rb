@@ -6,8 +6,6 @@ RSpec.describe UsersController, type: :controller do
     if User.where(:name => "Alexander Preau").empty?
       User.create(:name => "Alexander Preau", :username => "test1",
                    :password => "password1")
-      User.create(:school => "New York University", :name => "C++",
-                  :subject => "Computer Science", :website => "http://test.com")
 
     end
   end
