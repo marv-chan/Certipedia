@@ -3,6 +3,7 @@ class SessionsController < ApplicationController
 
   def new
     if session[:username] != nil
+      @user = User.where(username: uname)
       redirect_to users_path
     end
   end
