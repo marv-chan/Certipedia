@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
   @have_logged = false
+  has_many :bookmarks
+  has_many :certificates, :through => :bookmarks
 
   def self.welcome
     "Hello, #{self.name}"
@@ -22,6 +24,8 @@ class User < ActiveRecord::Base
     uname = params[:username]
     pword = params[:password]
     name = params[:name]
+
+
     @user = User.create(:username => uname,:password =>pword,:name => name)
     return @user
   end
@@ -35,11 +39,8 @@ class User < ActiveRecord::Base
     return @user.first
   end
 
-
-
-
-
-  def self.bookmarked_courses
+  def self.bookmarked_courses(user)
+    
     return false
   end
 

@@ -2,7 +2,18 @@ class CertificatesController < ApplicationController
 
   def show
     id = params[:id]
+    uname = session[:username]
+    @bookmarked = false
     @certificate = Certificate.find(id)
+    if uname == nil
+      return
+    end
+    @user = User.joins(:bookmarks).where(
+      username: uname,
+      bookmarks: {certificate_id: @certificate.id})
+    if !@user.empty?
+      @bookmarked = true
+    end
   end
 
   def index
@@ -22,15 +33,14 @@ class CertificatesController < ApplicationController
     elsif session[:schools]
       @schools_to_show = session[:schools]
       switch = true
-    else 
+    else
       @schools_to_show = Hash[@all_schools.map {|v| [v,1]}]
-      switch = true
     end
 
     if switch
       redirect_to certificates_path(:sort => @sorted, :schools => @schools_to_show)
     end
-    
+
     @certificates = Certificate.with_schools(@schools_to_show)
     if @sorted
       @certificates = Certificate.with_schools(@schools_to_show).order(@sorted)

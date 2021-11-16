@@ -14,8 +14,8 @@
 ActiveRecord::Schema.define(version: 20211111190100) do
 
   create_table "bookmarks", force: :cascade do |t|
-    t.integer  "users_id"
-    t.integer  "certificates_id"
+    t.integer  "user_id"
+    t.integer  "certificate_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
