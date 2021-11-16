@@ -1,6 +1,6 @@
 Certipedia::Application.routes.draw do
   resources :certificates do
-    resources :bookmarks
+    resources :bookmarks, only: [:new]
   end
   # map '/' to be a redirect to '/certificates'
   root :to => redirect('/certificates')

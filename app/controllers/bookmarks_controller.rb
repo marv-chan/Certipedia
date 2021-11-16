@@ -8,6 +8,8 @@ class BookmarksController < ApplicationController
     @user = User.get_user(uname)
     if @user == false
       flash[:notice] = "Please login before you attempt to add bookmarks."
+      redirect_to certificates_path
+      return
     else
       flash[:notice] = "Added bookmark for course #{@certificate.name} !"
     end

@@ -33,30 +33,13 @@ RSpec.describe UsersController, type: :controller do
     user = User.create(:name => "Marvin", :username => "test2",
                   :password => "password2")
 
-    it ' render the index' do
+    it ' rendirect to new user' do
       get :index
-      expect(response).to render_template('index')
+      expect(response).to redirect_to('/users/new')
     User.find_by(:name => "Marvin").destroy
     end
   end
 
-
-  describe 'GET edit' do
-    user = User.create(:name => "Marvin", :username => "test2",
-                  :password => "password2")
-    before(:each) do
-      get :edit, id: user.id
-    end
-
-    it 'find the user' do
-      expect(assigns(:User)).to eql(user)
-    end
-
-    it 'should render the show template' do
-      expect(response).to render_template('edit')
-    end
-    User.find_by(:name => "Marvin").destroy
-  end
 
 
   describe 'GET new' do
@@ -75,9 +58,11 @@ RSpec.describe UsersController, type: :controller do
   before(:each) do
     get :show, id: user.id
   end
+  print(user.id)
+
 
   it 'should find the user' do
-    expect(assigns(:User)).to eql(user)
+    expect(assigns(:user)).to eql(user)
   end
 
   it 'render show' do
@@ -87,23 +72,6 @@ RSpec.describe UsersController, type: :controller do
 end
 
 
-describe 'PUT update' do
-  user = User.create(:name => "Marvin", :username => "test2",
-                :password => "password2")
-  before(:each) do
-    put :update, id: user.id,  :User => {:name => "Modified"}
-  end
-
-  it 'updates a user' do
-    user.reload
-    expect(user.name).to eql('Modified')
-  end
-
-  it 'redirects to the user page' do
-    expect(response).to redirect_to(User_path(user))
-  end
-  User.find_by(:name => "Marvin").destroy
-end
 
 
 end

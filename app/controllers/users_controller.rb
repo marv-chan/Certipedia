@@ -39,16 +39,15 @@ class UsersController < ApplicationController
       session[:username] = @user.username
       flash[:notice] = 'User was created'
       redirect_to @user
+      return
     else
       flash[:error] = 'Failed -- please try to create an account again'
       redirect_to new_user_path
+      return
     end
 
   end
 
-  def edit
-    @user = User.find params[:id]
-  end
 
 
   private
