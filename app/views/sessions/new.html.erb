@@ -1,0 +1,12 @@
+<h2>Log in</h2>
+
+<%= form_tag sessions_path, :class => 'form' do %>
+  <%= label :sessions, :username, 'Username', :class => 'col-form-label' %>
+  <%= text_field :sessions, :username, :class => 'form-control' %>
+  <%= label :sessions, :password, 'Password', :class => 'col-form-label' %>
+  <%= text_field :sessions, :password, :class => 'form-control' %>
+
+  <br/>
+  <%= submit_tag 'Login', :class => 'btn btn-primary' %>
+  <%= link_to 'Sign Up', users_path, :class => 'btn btn-secondary' %>
+<% end %>

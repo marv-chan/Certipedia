@@ -1,0 +1,33 @@
+
+
+<%= @user.name %>
+<h2>Here are courses you have bookmarked</h2>
+
+<%= link_to 'Certificate List', certificates_path, :class => 'btn btn-secondary' %>
+
+
+<table class="table col-md-12" id="certificates">
+  <thead class="table-dark">
+    <tr>
+      <th>Certification Name</th>
+      <th>School</th>
+      <th>Subject Area</th>
+      <th>More Information</th>
+    </tr>
+  </thead>
+  <tbody class="table-light">
+    <% Bookmark.get_bookmarks(@user).each do |certificate| %>
+      <tr>
+        <td class="h6">
+          <%= certificate.name %>
+        </td>
+        <td class="h6">
+          <%= certificate.username %>
+        </td>
+        <td class="h6">
+          <%= certificate.password %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

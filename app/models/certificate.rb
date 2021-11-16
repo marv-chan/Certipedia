@@ -1,7 +1,17 @@
 class Certificate < ActiveRecord::Base
 
+  def self.with_schools(school_list)
+      if(school_list == nil)
+      return Certificate.all
+    else
+      list = school_list.keys
+      return Certificate.where(school: list)
+    end
+  end
+
   def self.all_schools
-    ['Columbia University', 'New York University', 'Cornell University']
+    all_schools = ['Columbia University', 'New York University', 'Cornell University']
+    return all_schools
   end
 
   def self.all_subjects
@@ -18,4 +28,13 @@ class Certificate < ActiveRecord::Base
     return Certificate.where(school: school_list, subject: subject_list)
   end
 
+  def origin
+    if self.school == 'New York University'
+      "https://www.nyu.edu"
+    elsif self.school == 'Cornell University'
+      "https://www.cornell.edu"
+    else 
+      "https://www.columbia.edu"
+    end
+  end
 end
