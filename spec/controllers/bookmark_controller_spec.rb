@@ -20,7 +20,7 @@ RSpec.describe BookmarksController, type: :controller do
     it 'tries to create without being logged in' do
       get(:new, certificate_id: cert.id,username: nil)
       expect(flash[:notice]).to match(/Please login before you attempt to add bookmarks./)
-      expect(response).to render_template('index')
+      expect(response).to redirect_to(certificates_path)
 
     end
 
@@ -31,7 +31,7 @@ RSpec.describe BookmarksController, type: :controller do
 
 
       get(:new, certificate_id: cert.id,username: user.username  )
-      expect(flash[:notice]).to match(/Bookmark created./)
+      expect(flash[:notice]).to match(/Added bookmark for course #{cert.name} !/)
       expect(response).to render_template('index')
     Certificate.find_by(:school => "Cornell University").destroy
     User.find_by(:name => "Alexander").destroy
