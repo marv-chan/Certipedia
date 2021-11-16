@@ -1,4 +1,6 @@
 class Certificate < ActiveRecord::Base
+  has_many :bookmarks
+  has_many :users, :through => :bookmarks
 
   def self.with_schools(school_list)
       if(school_list == nil)
