@@ -2,7 +2,18 @@ class CertificatesController < ApplicationController
 
   def show
     id = params[:id]
+    uname = session[:username]
+    @bookmarked = true
     @certificate = Certificate.find(id)
+    if uname == nil
+      return
+    end
+    @user = User.joins(:bookmarks).where(
+      username: uname,
+      bookmarks: {certificate_id: @certificate.id})
+    if @user.empty?
+      @bookmarked = false
+    end
   end
 
   def index

@@ -29,11 +29,14 @@
   </li>
 
   <li>
+  <% if @bookmarked %>
+    <h5>Bookmarked!</h5>
+  <% else %>
     <h5>Add to Bookmarks </h5>
     <p id="bookmarks">
     <%= link_to 'Create Bookmark', new_bookmark_path(:certificate_id => @certificate.id), :class => 'btn btn-dark', remote: true %>
     </p>
+  <% end %>
   </li>
-
 
 </ul>
