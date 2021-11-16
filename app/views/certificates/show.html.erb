@@ -17,15 +17,21 @@
   <li>
     <h5>Program Website: </h5>
     <p id="description">
-    <%= @certificate.website %>
+    <a href=<%= @certificate.website %>><%= @certificate.website %></a>
     </p>
   </li>
 
+  <li>
+    <h5>Learn More About the School: </h5>
+    <p id="description">
+    <a href=<%= @certificate.origin %>><%= @certificate.origin %></a>
+    </p>
+  </li>
 
   <li>
     <h5>Add to Bookmarks </h5>
     <p id="bookmarks">
-    <%= link_to 'Create Bookmark', new_certificate_bookmark_path(:certificate_id => @certificate.id), :class => 'btn btn-dark'%>
+    <%= link_to 'Create Bookmark', new_certificate_bookmark_path(:certificate_id => @certificate.id), :class => 'btn btn-dark', remote: true %>
     </p>
   </li>
 

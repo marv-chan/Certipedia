@@ -6,15 +6,47 @@ class CertificatesController < ApplicationController
   end
 
   def index
-    @certificates = Certificate.all
+    @all_schools = Certificate.all_schools
+
+    switch = false
+
+    if params[:sort]
+      @sorted = params[:sort]
+    elsif session[:sort]
+      @sorted = session[:sort]
+      switch = true
+    end
+
+    if params[:schools]
+      @schools_to_show = params[:schools]
+    elsif session[:schools]
+      @schools_to_show = session[:schools]
+      switch = true
+    else 
+      @schools_to_show = Hash[@all_schools.map {|v| [v,1]}]
+      switch = true
+    end
+
+    if switch
+      redirect_to certificates_path(:sort => @sorted, :schools => @schools_to_show)
+    end
+    
+    @certificates = Certificate.with_schools(@schools_to_show)
+    if @sorted
+      @certificates = Certificate.with_schools(@schools_to_show).order(@sorted)
+    end
+
+    session[:sort] = @sorted
+    session[:schools] = @schools_to_show
+
+    @name_header = (params[:sort] == 'name') ? "hilite" : ""
+
+    @subject_header = (params[:sort] == 'subject') ? "hilite" : ""
   end
 
   def new
     # default: render 'new' template
   end
-
-
-
 
   def create
     @certificate = Certificate.create!(certificate_params)
