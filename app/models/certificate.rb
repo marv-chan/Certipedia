@@ -28,8 +28,8 @@ class Certificate < ActiveRecord::Base
     return Certificate.where(school: school_list, subject: subject_list)
   end
 
-  def initialize
-    @schools_to_show = []
-  end
+  #def initialize
+  #  @schools_to_show = []
+  #end
 
 end
