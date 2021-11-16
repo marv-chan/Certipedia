@@ -18,4 +18,14 @@ class Certificate < ActiveRecord::Base
     return Certificate.where(school: school_list, subject: subject_list)
   end
 
+  def origin
+    if self.school == 'New York University'
+      "https://www.nyu.edu"
+    elsif self.school == 'Cornell University'
+      "https://www.cornell.edu"
+    else 
+      "https://www.columbia.edu"
+    end
+  end
+
 end

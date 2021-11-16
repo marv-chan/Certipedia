@@ -8,13 +8,13 @@ class Bookmark < ActiveRecord::Base
       end
     end
 
-    print(@bookmarks )
+    print(@bookmarks)
     return @bookmarks
   end
 
 
   #this fails, I have tried user and users and tried changing the schema 
-  def self.add_bookmark(course,user)
+  def self.add_bookmark(user, course)
     @bookmark = Bookmark.create!(:users => user, :certificates=> course)
   end
 

@@ -16,7 +16,7 @@
     </tr>
   </thead>
   <tbody class="table-light">
-    <% Bookmark.get_bookmarks(@users).each do |certificate| %>
+    <% Bookmark.get_bookmarks(@user).each do |certificate| %>
       <tr>
         <td class="h6">
           <%= certificate.name %>
