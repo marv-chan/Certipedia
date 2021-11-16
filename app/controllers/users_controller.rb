@@ -3,11 +3,10 @@ class UsersController < ApplicationController
 
   def show
     uname = session[:username]
-    print(uname)
     @user = User.find(params[:id])
     if @user.username != uname
       flash[:notice] = 'You do not have permission to view this page'
-      redirect_to new_user_path
+      redirect_to new_session_path
       return
     end
     @courses = User.bookmarked_courses
@@ -27,23 +26,15 @@ class UsersController < ApplicationController
   end
 
   def create
-    print(params)
-    @user = User.try_login(user_params)
-    if @user == false
+    @user = User.where(username: user_params[:username])
+    if @user.empty?
       @user = User.make_new_user(user_params)
-    end
-
-    if @user.valid?
-    #  session.clear
-    #  print(session[:username])
-      session[:username] = @user.username
       flash[:notice] = 'User was created'
-      redirect_to @user
+      redirect_to new_session_path
     else
-      flash[:error] = 'Failed -- please try to create an account again'
-      redirect_to new_user_path
+      flash[:error] = 'Username already exists'
+      redirect_to users_path
     end
-
   end
 
   def edit

@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   def require_login
     @uname = session[:username]
     if @uname == nil
-      redirect_to new_user_path
+      redirect_to new_session_path
     end
     #redirect_to new_user_path unless session.include? :username
   end

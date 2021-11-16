@@ -1,10 +1,9 @@
 class SessionsController < ApplicationController
-  skip_before_action :require_login, only: [:new, :create]
 
   def new
     if session[:username] != nil
-      @user = User.where(username: uname)
-      redirect_to users_path
+      @user = User.where(username: session[:username]).first
+      redirect_to @user
     end
   end
 
@@ -14,12 +13,12 @@ class SessionsController < ApplicationController
     @user = User.where(username: uname, password: pword)
     print(@user.empty?)
     if @user.empty?
-      flash[:notice] = 'Username or password error'
+      flash[:error] = 'Username or password error'
       redirect_to new_session_path
       return
     end
     session[:username] = uname
-    redirect_to users_path
+    redirect_to @user.first
   end
 
   private
