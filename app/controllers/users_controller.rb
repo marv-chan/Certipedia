@@ -3,6 +3,9 @@ class UsersController < ApplicationController
 
   def show
     uname = session[:username]
+    User.all.each do |u|
+      print u.name
+    end
     @user = User.find(params[:id])
     if @user.username != uname
       flash[:notice] = 'You do not have permission to view this page'
@@ -32,8 +35,8 @@ class UsersController < ApplicationController
       flash[:notice] = 'User was created'
       redirect_to new_session_path
     else
-      flash[:error] = 'Username already exists'
-      redirect_to users_path
+      flash[:notice] = 'Username already exists'
+      redirect_to new_user_path
     end
   end
 

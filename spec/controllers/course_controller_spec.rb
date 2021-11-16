@@ -2,15 +2,7 @@ require 'rails_helper'
 
 
 RSpec.describe CertificatesController, type: :controller do
-  before(:all) do
-    if Certificate.where(:school => "Columbia University").empty?
-      Certificate.create(:school => "Columbia University", :name => "SQL",
-                   :subject => "Computer Science", :website => "http://test.com")
-      Certificate.create(:school => "New York University", :name => "C++",
-                  :subject => "Computer Science", :website => "http://test.com")
 
-    end
-  end
 
 
 
@@ -37,15 +29,7 @@ RSpec.describe CertificatesController, type: :controller do
     end
   end
 
-  describe "destroy" do
-    it "deletes a certificate" do
-        orig_cert_length = Certificate.all.length()
-        Certificate.find_by(:name => "SQL").destroy
-        Certificate.find_by(:name => "C++").destroy
-        new_cert_length = Certificate.all.length()
-        expect(orig_cert_length).to eq new_cert_length+2
-    end
-  end
+
 
 
   describe 'GET index' do
@@ -55,13 +39,13 @@ RSpec.describe CertificatesController, type: :controller do
     it ' render the index' do
       get :index
       expect(response).to render_template('index')
-    Certificate.find_by(:school => "Cornell University").destroy
+    #Certificate.find_by(:school => "Cornell University").destroy
     end
   end
 
 
   describe 'GET edit' do
-    cert = Certificate.create(:school => "Cornell University", :name => "NoSQL",
+    cert =   Certificate.create(:school => "Columbia University", :name => "NoSQL",
                          :subject => "Computer Science", :website => "http://test.com")
     before(:each) do
       get :edit, id: cert.id
@@ -74,7 +58,7 @@ RSpec.describe CertificatesController, type: :controller do
     it 'should render the show template' do
       expect(response).to render_template('edit')
     end
-    Certificate.find_by(:school => "Cornell University").destroy
+    #Certificate.find_by(:school => "Columbia University").destroy
   end
 
 
@@ -89,21 +73,21 @@ RSpec.describe CertificatesController, type: :controller do
 
 
   describe 'GET show' do
-    cert = Certificate.create(:school => "Cornell University", :name => "NoSQL",
+    cert = Certificate.create(:school => "Cornell University", :name => "SQL",
                          :subject => "Computer Science", :website => "http://test.com")
-  before(:each) do
-    get :show, id: cert.id
-  end
 
-  it 'should find the cert' do
-    expect(assigns(:certificate)).to eql(cert)
-  end
+    before(:each) do
+      get :show, id: cert.id
+    end
 
-  it 'render show' do
-    expect(response).to render_template('show')
+    it 'should find the cert' do
+      expect(assigns(:certificate)).to eql(cert)
+    end
+
+    it 'render show' do
+      expect(response).to render_template('show')
+    end
   end
-  Certificate.find_by(:school => "Cornell University").destroy
-end
 
 
 describe 'PUT update' do
@@ -121,8 +105,23 @@ describe 'PUT update' do
   it 'redirects to the cert page' do
     expect(response).to redirect_to(certificate_path(cert))
   end
-  Certificate.find_by(:school => "Cornell University").destroy
 end
+
+describe "destroy" do
+  it "deletes a certificate" do
+      orig_cert_length = Certificate.all.length()
+      Certificate.find_by(:name => "NoSQL").destroy
+      Certificate.find_by(:name => "SQL").destroy
+      new_cert_length = Certificate.all.length()
+      expect(orig_cert_length).to eq new_cert_length+2
+  end
+end
+
+  after(:all) do
+    Certificate.all.each {|cert|
+    cert.destroy
+  }
+  end
 
 
 end

@@ -2,13 +2,7 @@ require 'rails_helper'
 
 
 RSpec.describe UsersController, type: :controller do
-  before(:all) do
-    if User.where(:name => "Alexander Preau").empty?
-      User.create(:name => "Alexander Preau", :username => "test1",
-                   :password => "password1")
 
-    end
-  end
 
 
 
@@ -18,7 +12,7 @@ RSpec.describe UsersController, type: :controller do
       get :create, {:user => {:name => "Marvin", :username => "test2",
                     :password => "password2"}}
       expect(flash[:notice]).to match(/User was created/)
-      User.find_by(:name => "Marvin").destroy
+    #  User.find_by(:name => "Marvin").destroy
     end
   end
 
@@ -28,13 +22,14 @@ RSpec.describe UsersController, type: :controller do
 
 
   describe 'GET index' do
-    user = User.create(:name => "Marvin", :username => "test2",
-                  :password => "password2")
+    user = User.create(:name => "Alexander", :username => "test3",
+                  :password => "password3")
+    print(user.name)
 
-    it ' rendirect to new user' do
+    it ' rendirect to show' do
       get :index
       expect(response).to redirect_to('/users/new')
-    User.find_by(:name => "Marvin").destroy
+  #  User.find_by(:name => "Alexander").destroy
     end
   end
 
@@ -51,12 +46,13 @@ RSpec.describe UsersController, type: :controller do
 
 
   describe 'GET show' do
-    user = User.create(:name => "Marvin", :username => "test2",
-                  :password => "password2")
+    user = User.create(:name => "Nidhi", :username => "test4",
+                  :password => "password4")
+    print(user)
   before(:each) do
-    get :show, id: user.id
+    get :show, id: user.id, username: user.username
   end
-  print(user.id)
+  #print(user.id)
 
 
   it 'should find the user' do
@@ -66,8 +62,15 @@ RSpec.describe UsersController, type: :controller do
   it 'render show' do
     expect(response).to render_template('show')
   end
-  User.find_by(:name => "Marvin").destroy
+  User.find_by(:name => "Nidhi").destroy
 end
+
+  after(:all) do
+
+    User.all.each {|user|
+      user.destroy
+  }
+  end
 
 
 

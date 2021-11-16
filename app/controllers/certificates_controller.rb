@@ -22,15 +22,14 @@ class CertificatesController < ApplicationController
     elsif session[:schools]
       @schools_to_show = session[:schools]
       switch = true
-    else 
+    else
       @schools_to_show = Hash[@all_schools.map {|v| [v,1]}]
-      switch = true
     end
 
     if switch
       redirect_to certificates_path(:sort => @sorted, :schools => @schools_to_show)
     end
-    
+
     @certificates = Certificate.with_schools(@schools_to_show)
     if @sorted
       @certificates = Certificate.with_schools(@schools_to_show).order(@sorted)

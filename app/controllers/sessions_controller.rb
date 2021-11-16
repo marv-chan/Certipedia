@@ -11,6 +11,7 @@ class SessionsController < ApplicationController
     uname = sessions_params[:username]
     pword = sessions_params[:password]
     @user = User.where(username: uname, password: pword)
+    print(@user)
     print(@user.empty?)
     if @user.empty?
       flash[:error] = 'Username or password error'
