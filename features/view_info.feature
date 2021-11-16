@@ -16,6 +16,6 @@ Background: courses in database
 
 Scenario: view certificate information
   Given I am on home page
-  And I follow "More about Networking"
+  And I follow "More about Gogol"
   Then I should see "Computer Science"
   Then I should see "Columbia"
