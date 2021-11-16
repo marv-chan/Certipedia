@@ -3,6 +3,7 @@ class BookmarksController < ApplicationController
   def new
   #  print(params)
     cert_id = params[:certificate_id]
+    print(params)
     @certificate = Certificate.find cert_id
     uname = session[:username]
     @user = User.get_user(uname)

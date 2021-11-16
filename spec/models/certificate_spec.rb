@@ -25,8 +25,8 @@ end
       certs = Certificate.with_filter(["Cornell University"],[],0)
       correct_certs = all_certs = Certificate.where(school: ['Cornell University'], subject: Certificate.all_subjects)
       expect(certs.length()).to eq correct_certs.length()
-      Certificate.find_by(:name => "SQL").destroy
-      Certificate.find_by(:name => "C++").destroy
+    #  Certificate.find_by(:name => "SQL").destroy
+    #  Certificate.find_by(:name => "C++").destroy
 
 
     end
@@ -36,5 +36,11 @@ end
     it "all schools should be a list of all schools" do
       expect(Certificate.all_schools).to eq ['Columbia University', 'New York University', 'Cornell University']
     end
+  end
+
+  after(:all) do
+    Certificate.all.each {|cert|
+    cert.destroy
+  }
   end
 end

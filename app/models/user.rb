@@ -22,6 +22,8 @@ class User < ActiveRecord::Base
     uname = params[:username]
     pword = params[:password]
     name = params[:name]
+
+
     @user = User.create(:username => uname,:password =>pword,:name => name)
     return @user
   end
