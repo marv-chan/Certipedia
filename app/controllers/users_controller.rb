@@ -3,11 +3,12 @@ class UsersController < ApplicationController
 
   def show
     uname = session[:username]
+    print(uname)
     @user = User.find(params[:id])
     if @user.username != uname
       flash[:notice] = 'You do not have permission to view this page'
-        redirect_to new_user_path
-        return
+      redirect_to new_user_path
+      return
     end
     @courses = User.bookmarked_courses
   end
@@ -26,7 +27,7 @@ class UsersController < ApplicationController
   end
 
   def create
-
+    print(params)
     @user = User.try_login(user_params)
     if @user == false
       @user = User.make_new_user(user_params)

@@ -1,5 +1,5 @@
 
-<h2>Log in/ Create user</h2>
+<h2>Sign Up</h2>
 
 
 <%= form_tag users_path, :class => 'form' do %>
@@ -11,6 +11,6 @@
   <%= text_field :user, :password, :class => 'form-control' %>
 
   <br/>
-  <%= submit_tag 'Save Changes', :class => 'btn btn-primary' %>
-  <%= link_to 'Cancel', certificates_path, :class => 'btn btn-secondary' %>
+  <%= submit_tag 'Sign Up', :class => 'btn btn-primary' %>
+  <%= link_to 'Cancel', new_session_path, :class => 'btn btn-secondary' %>
 <% end %>
