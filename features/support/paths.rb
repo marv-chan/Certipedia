@@ -16,6 +16,8 @@ module NavigationHelpers
     when /^home page$/ then '/certificates'
 
     when /^new page$/ then 'certificates/new'
+  
+    when /^new user page$/ then 'users/new'
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
