@@ -40,6 +40,7 @@ class User < ActiveRecord::Base
   end
 
   def self.bookmarked_courses(user)
+
     @certs = []
     @bookmarks = Bookmark.where(:user => user)
 
@@ -51,6 +52,7 @@ class User < ActiveRecord::Base
     print(@certs)
 
     return @certs
+
   end
 
 end
