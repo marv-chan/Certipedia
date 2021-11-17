@@ -1,21 +1,24 @@
 class UsersController < ApplicationController
-   before_action :require_login, only: [:show]
+   skip_before_action :require_login, only: [:new, :create]
 
   def show
     uname = session[:username]
+
+
     @user = User.find(params[:id])
 
+    #print(:session)
     if @user.username != uname
       flash[:notice] = 'You do not have permission to view this page'
       redirect_to new_session_path
       return
     end
-    @certificates = @user.certificates
-    return 
+    @certificates =  User.bookmarked_courses(@user)
+
   end
 
   def index
-    redirect_to new_user_path 
+    redirect_to new_user_path
   end
 
   def first_page
@@ -32,7 +35,7 @@ class UsersController < ApplicationController
     if @user.empty?
       @user = User.make_new_user(user_params)
       flash[:notice] = 'User was created'
-      #session[:username] = @user.username
+      session[:username] = @user.username
       redirect_to new_session_path
     else
       flash[:notice] = 'Username already exists'

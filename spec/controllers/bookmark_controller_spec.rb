@@ -35,9 +35,9 @@ RSpec.describe BookmarksController, type: :controller do
                    :password => "password1")
 
 
-      get :new, {certificate_id: cert.id} ,{username: user.username}  
-      expect(flash[:notice]).to match(/Added bookmark for course #{cert.name} !/)
-      expect(response).to render_template('index')
+      get :new, {certificate_id: cert.id} ,{username: user.username}
+      expect(flash[:notice]).to match(/Added bookmark for course #{cert.name}!/)
+      expect(response).to redirect_to(certificates_path)
       Certificate.find_by(:school => "Cornell University").destroy
 
 
