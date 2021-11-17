@@ -8,7 +8,6 @@ class User < ActiveRecord::Base
   end
 
   def self.try_login(params)
-    print(params)
     uname = params[:username]
     pword = params[:password]
     name = params[:name]
@@ -40,8 +39,17 @@ class User < ActiveRecord::Base
   end
 
   def self.bookmarked_courses(user)
-    
-    return false
+
+    @certs = []
+    @bookmarks = Bookmark.where(:user => user)
+
+    @bookmarks.each do |bm|
+        @certs.append(bm.certificate)
+
+    end
+
+    return @certs
+
   end
 
 end

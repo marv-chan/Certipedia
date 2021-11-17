@@ -64,9 +64,6 @@ class CertificatesController < ApplicationController
     redirect_to certificates_path
   end
 
-  def edit
-    @certificate = Certificate.find params[:id]
-  end
 
   def update
     @certificate = Certificate.find params[:id]
@@ -75,12 +72,6 @@ class CertificatesController < ApplicationController
     redirect_to certificate_path(@certificate)
   end
 
-  def destroy
-    @certificate = Certificate.find(params[:id])
-    @certificate.destroy
-    flash[:notice] = "Certificate '#{@certificate.name}' deleted."
-    redirect_to certificates_path
-  end
 
   private
   # Making "internal" methods private is not required, but is a common practice.
