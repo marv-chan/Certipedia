@@ -3,18 +3,14 @@ class UsersController < ApplicationController
 
   def show
     uname = session[:username]
-
-
     @user = User.find(params[:id])
 
-    #print(:session)
     if @user.username != uname
       flash[:notice] = 'You do not have permission to view this page'
       redirect_to new_session_path
       return
     end
-    @certificates =  User.bookmarked_courses(@user)
-
+    @certificates =  @user.certificates
   end
 
   def index
