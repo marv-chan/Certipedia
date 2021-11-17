@@ -5,6 +5,6 @@ Certipedia::Application.routes.draw do
 
   resources :users, only: [:new, :create, :index, :show]
   resources :sessions, only: [:new, :create]
-  resources :bookmarks, only: [:new]
+  resources :bookmarks, only: [:create]
 
 end
