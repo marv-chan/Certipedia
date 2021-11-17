@@ -15,7 +15,7 @@ class BookmarksController < ApplicationController
       flash[:notice] = "Added bookmark for course #{@certificate.name}!"
       @bookmark = Bookmark.add_bookmark(@user, @certificate)
     end
-    
+
     redirect_to @certificate
   end
 

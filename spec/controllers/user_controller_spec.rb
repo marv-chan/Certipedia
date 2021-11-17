@@ -12,7 +12,7 @@ RSpec.describe UsersController, type: :controller do
       get :create, {:user => {:name => "Marvin", :username => "test2",
                     :password => "password2"}}
       expect(flash[:notice]).to match(/User was created/)
-    #  User.find_by(:name => "Marvin").destroy
+
     end
   end
 
@@ -44,17 +44,15 @@ RSpec.describe UsersController, type: :controller do
 
   user = User.create(:name => "Alex", :username => "new",
                 :password => "password5")
-  print(user.name)
-#  user = User.where(:name => 'Alexander').first
+
   before(:each) do
     get :show, {id: user.id}, {username: user.username}
   end
-  #print(user.id)
+
 
 
   it 'should find the user' do
-    print(user)
-    print(@user)
+
     expect(assigns(:user)).to eql(user)
   end
 

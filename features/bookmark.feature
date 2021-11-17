@@ -19,6 +19,14 @@ Scenario: create bookmark with login
   And I fill in "Username" with "test"
   And I fill in "Password" with "123123"
   And I press "Sign Up"
+  And I fill in "name" with "test"
+  And I fill in "Password" with "123123"
+  And I press "Login"
+  Then I should see "Here are courses you have bookmarked"
+  When I follow "Certificate List"
+  Then I should see "More about Gogol"
   When I follow "More about Gogol"
-  And I follow "Create Bookmark"
+  When I press "Add to Bookmarks"
+  Then I should see "Bookmarked!"
+  
   

@@ -20,9 +20,8 @@ RSpec.describe BookmarksController, type: :controller do
       cert =   Certificate.create(:school => "Cornell University", :name => "NoSQL",
                            :subject => "Computer Science", :website => "http://test.com")
 
-      get(:new, certificate_id: cert.id,username: nil)
-      expect(flash[:notice]).to match(/Please login before you attempt to add bookmarks./)
-      expect(response).to redirect_to(certificates_path)
+      get :create  #call with no session username
+      expect(response).to redirect_to(new_session_path)
       Certificate.find_by(:school => "Cornell University").destroy
 
     end
@@ -35,13 +34,16 @@ RSpec.describe BookmarksController, type: :controller do
                    :password => "password1")
 
 
-      get :new, {certificate_id: cert.id} ,{username: user.username}
+      get :create, {bookmarks: {certificate_id: cert.id}},{username: user.username}
       expect(flash[:notice]).to match(/Added bookmark for course #{cert.name}!/)
-      expect(response).to redirect_to(certificates_path)
+      expect(response).to redirect_to(certificate_path(cert.id))
+
       Certificate.find_by(:school => "Cornell University").destroy
+      Bookmark.find_by(:certificate_id => cert.id).destroy
+      User.find_by(:username => user.username).destroy
 
 
-  end
+    end
   end
 
 end
