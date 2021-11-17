@@ -10,4 +10,16 @@ RSpec.describe CertificatesController, type: :controller do
 
     end
   end
+    
+  describe 'GET index' do
+    user = User.create(:name => "Alexander", :username => "test3",
+                  :password => "password3")
+
+
+    it ' redirect to show' do
+      get :index
+      expect(response).to redirect_to('/users/new')
+    end
+  end
+    
 end 
