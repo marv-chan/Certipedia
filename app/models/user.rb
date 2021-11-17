@@ -41,7 +41,18 @@ class User < ActiveRecord::Base
 
   def self.bookmarked_courses(user)
 
-    return false
+    @certs = []
+    @bookmarks = Bookmark.where(:user => user)
+
+    @bookmarks.each do |bm|
+        @certs.append(bm.certificate)
+      #print(bm.certificate)
+    end
+
+    print(@certs)
+
+    return @certs
+
   end
 
 end

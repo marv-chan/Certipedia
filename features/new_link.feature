@@ -1,7 +1,7 @@
-Feature: view certificate information
-
+Feature: see link information
+  
   As a prospective student
-  So that I can find course information
+  So that I can find course information and search for more relevant information about the school
   I want to be able to view the certificate specifics
 
 Background: courses in database
@@ -11,12 +11,13 @@ Background: courses in database
   | Columbia University        |  Networking      | Computer Science     |  https://test.com |
   | New York University        |  Urban Planning  | Public Policy        |  https://test.com |
   | Columbia University        |  SQL             | Data Science         |  https://test.com |
-  | Columbia University        |  Gogol           | Computer Science     |  https://test.com |
-
+  | Cornell University         |  Gogol           | Russian Literature   |  https://test.com |
 
 
 Scenario: view certificate information
   Given I am on home page
-  When I follow "More about Gogol"
-  Then I should see "Computer Science"
+  And I follow "More about SQL"
+  Then I should see "Data Science"
   Then I should see "Columbia University"
+  Then I should see "https://test.com"
+  Then I should see "https://www.columbia.edu"

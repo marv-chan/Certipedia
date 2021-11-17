@@ -16,11 +16,6 @@ RSpec.describe UsersController, type: :controller do
     end
   end
 
-
-
-
-
-
   describe 'GET index' do
     user = User.create(:name => "Alexander", :username => "test3",
                   :password => "password3")
