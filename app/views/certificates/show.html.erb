@@ -30,7 +30,8 @@
 
   <li>
   <% if @bookmarked %>
-    <h5>Bookmarked!</h5>
+	  <h5>Bookmarked!</h5>
+	  <%= button_to 'Unbookmark', bookmark_path(@certificate), :method => 'delete' %>
   <% else %>
     <%= form_tag bookmarks_path, :class => 'form' do %>
       <%= text_field :bookmarks, :certificate_id, :class => 'form-control', :value =>"#{@certificate.id}", :type => 'hidden' %>
