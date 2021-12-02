@@ -59,6 +59,11 @@ class CertificatesController < ApplicationController
   end
 
   def create
+    if session[:admin] == nil
+      flash[:notice] = "You don't have permission to create certificate"
+      redirect_to certificates_path
+      return
+    end
     @certificate = Certificate.create!(certificate_params)
     flash[:notice] = "#{@certificate.name} was successfully created."
     redirect_to certificates_path
@@ -66,6 +71,11 @@ class CertificatesController < ApplicationController
 
 
   def update
+    if session[:admin] == nil
+      flash[:notice] = "You don't have permission to update certificate"
+      redirect_to certificate_path(@certificate)
+      return
+    end
     @certificate = Certificate.find params[:id]
     @certificate.update_attributes!(certificate_params)
     flash[:notice] = "#{@certificate.name} was successfully updated."

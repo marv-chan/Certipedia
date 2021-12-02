@@ -4,7 +4,7 @@ class BookmarksController < ApplicationController
   def create
     @user = User.where(username: session[:username])
     if @user.empty?
-      redirect_to new_session_path
+      redirect_to login_url
       return
     end
     @user = @user.first
