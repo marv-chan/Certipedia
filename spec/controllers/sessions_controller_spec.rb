@@ -19,7 +19,7 @@ RSpec.describe SessionsController, type: :controller do
 
       get :create, sessions: {username: nil,password:nil}
       expect(flash[:error]).to match(/Username or password error/)
-      expect(response).to redirect_to(new_session_path)
+      expect(response).to redirect_to(login_url)
     end
 
     it 'redirects to user if sucessfull' do

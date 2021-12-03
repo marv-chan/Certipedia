@@ -21,7 +21,7 @@ RSpec.describe BookmarksController, type: :controller do
                            :subject => "Computer Science", :website => "http://test.com")
 
       get :create  #call with no session username
-      expect(response).to redirect_to(new_session_path)
+      expect(response).to redirect_to(login_url)
       Certificate.find_by(:school => "Cornell University").destroy
 
     end

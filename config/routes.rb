@@ -4,7 +4,9 @@ Certipedia::Application.routes.draw do
   root :to => redirect('/certificates')
 
   resources :users, only: [:new, :create, :index, :show]
-  resources :sessions, only: [:new, :create]
+  resources :sessions, only: [:create]
+  get '/login', to: 'sessions#login', as: 'login'
+  get '/logout', to: 'sessions#logout', as: 'logout'
   resources :bookmarks, only: [:create]
 
 end

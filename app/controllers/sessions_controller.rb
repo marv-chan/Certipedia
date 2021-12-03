@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
 
-  def new
+  def login
     if session[:username] != nil
       @user = User.where(username: session[:username]).first
       redirect_to @user
@@ -13,11 +13,23 @@ class SessionsController < ApplicationController
     @user = User.where(username: uname, password: pword)
     if @user.empty?
       flash[:error] = 'Username or password error'
-      redirect_to new_session_path
+      redirect_to login_url
       return
     end
+    if uname == 'admin'
+      session[:admin] = true
+    end
     session[:username] = uname
+    session[:id] = @user.first.id
     redirect_to @user.first
+  end
+
+  def logout
+    session[:username] = nil
+    session[:id] = nil
+    session[:admin] = nil
+    flash[:notice] = 'You have logged out'
+    redirect_to login_url
   end
 
   private
