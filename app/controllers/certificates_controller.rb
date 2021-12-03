@@ -59,25 +59,25 @@ class CertificatesController < ApplicationController
       @schools_to_show = session[:schools]
       switch = true
     else
-      @schools_to_show = Hash[@all_schools.map {|v| [v,1]}]
+      @schools_to_show = @all_schools
     end
 
 
     if params[:subjects]
       @subjects_to_show = params[:subjects]
-      print("params")
+      #print("params")
 
     elsif session[:subjects]
       @subjects_to_show = session[:subjects]
       switch = true
-      print("session")
+    #  print("session")
     else
       @subjects_to_show = @all_subjects
-      print("recovered from hash")
+  #    print("recovered from hash")
     end
-    print(@subjects_to_show)
-    print("printing session")
-    print(session[:subjects])
+  #  print(@subjects_to_show)
+  #  print("printing session")
+  #  print(session[:subjects])
 
     if switch
       redirect_to certificates_path(:sort => @sorted, :schools => @schools_to_show,:subjects => @subjects_to_show)
