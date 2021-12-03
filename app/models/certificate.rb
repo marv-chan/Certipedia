@@ -6,21 +6,22 @@ class Certificate < ActiveRecord::Base
       if(school_list == nil)
       return Certificate.all
     else
-      list = school_list.keys
+
+      list = school_list
       return Certificate.where(school: list)
     end
   end
 
   def self.all_schools
-    all_schools = ['Columbia University', 'New York University', 'Cornell University']
+    return Certificate.select(:school).map(&:school).uniq
     return all_schools
   end
 
   def self.all_subjects
-    ['Computer Science', 'Business']
+    return Certificate.select(:subject).map(&:subject).uniq
   end
 
-  def self.with_filter(school_list, subject_list, order)
+  def self.with_filter(school_list, subject_list)
     if school_list == []
       school_list = Certificate.all_schools
     end
@@ -35,7 +36,7 @@ class Certificate < ActiveRecord::Base
       "https://www.nyu.edu"
     elsif self.school == 'Cornell University'
       "https://www.cornell.edu"
-    else 
+    else
       "https://www.columbia.edu"
     end
   end

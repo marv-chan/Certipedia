@@ -16,8 +16,32 @@ class CertificatesController < ApplicationController
     end
   end
 
+  Schools = Struct.new(:name,:id) do
+  end
+
+  Subjects = Struct.new(:name,:id) do
+  end
+
   def index
+
     @all_schools = Certificate.all_schools
+    @schools = Array.new(3)
+    i = 0
+    @all_schools.each do |s|
+      @schools[i] = Schools.new(s,i)
+      i = i + 1
+    end
+
+    @all_subjects = Certificate.all_subjects
+
+
+    @subjects = Array.new(2)
+    i = 0
+    @all_subjects.each do |s|
+      @subjects[i] = Subjects.new(s,i)
+      i = i + 1
+    end
+
 
     switch = false
 
@@ -30,6 +54,7 @@ class CertificatesController < ApplicationController
 
     if params[:schools]
       @schools_to_show = params[:schools]
+
     elsif session[:schools]
       @schools_to_show = session[:schools]
       switch = true
@@ -37,17 +62,39 @@ class CertificatesController < ApplicationController
       @schools_to_show = Hash[@all_schools.map {|v| [v,1]}]
     end
 
+
+    if params[:subjects]
+      @subjects_to_show = params[:subjects]
+      print("params")
+
+    elsif session[:subjects]
+      @subjects_to_show = session[:subjects]
+      switch = true
+      print("session")
+    else
+      @subjects_to_show = @all_subjects
+      print("recovered from hash")
+    end
+    print(@subjects_to_show)
+    print("printing session")
+    print(session[:subjects])
+
     if switch
-      redirect_to certificates_path(:sort => @sorted, :schools => @schools_to_show)
+      redirect_to certificates_path(:sort => @sorted, :schools => @schools_to_show,:subjects => @subjects_to_show)
     end
 
-    @certificates = Certificate.with_schools(@schools_to_show)
+    @certificates = Certificate.with_filter(@schools_to_show,@subjects_to_show)
     if @sorted
-      @certificates = Certificate.with_schools(@schools_to_show).order(@sorted)
+      @certificates = Certificate.with_filter(@schools_to_show,@subjects_to_show).order(@sorted)
     end
 
     session[:sort] = @sorted
     session[:schools] = @schools_to_show
+
+    session[:subjects] = @subjects_to_show
+
+
+
 
     @name_header = (params[:sort] == 'name') ? "hilite" : ""
 
@@ -80,6 +127,14 @@ class CertificatesController < ApplicationController
     @certificate.update_attributes!(certificate_params)
     flash[:notice] = "#{@certificate.name} was successfully updated."
     redirect_to certificate_path(@certificate)
+  end
+
+
+  def destroy
+    @certificate = Certificate.find(params[:id])
+    @certificate.destroy
+    flash[:notice] = "Certificate '#{@certificate.name}' deleted."
+    redirect_to certificates_path
   end
 
   private
