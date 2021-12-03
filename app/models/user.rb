@@ -8,7 +8,6 @@ class User < ActiveRecord::Base
   end
 
   def self.try_login(params)
-    print(params)
     uname = params[:username]
     pword = params[:password]
     name = params[:name]
@@ -42,5 +41,4 @@ class User < ActiveRecord::Base
   def self.bookmarked_courses(user)
     return false
   end
-
 end

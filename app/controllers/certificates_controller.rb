@@ -59,28 +59,28 @@ class CertificatesController < ApplicationController
   end
 
   def create
+    if session[:admin] == nil
+      flash[:notice] = "You don't have permission to create certificate"
+      redirect_to certificates_path
+      return
+    end
     @certificate = Certificate.create!(certificate_params)
     flash[:notice] = "#{@certificate.name} was successfully created."
     redirect_to certificates_path
   end
 
-  #def edit
-    #@certificate = Certificate.find params[:id]
-  #end
 
   def update
+    if session[:admin] == nil
+      flash[:notice] = "You don't have permission to update certificate"
+      redirect_to certificate_path(@certificate)
+      return
+    end
     @certificate = Certificate.find params[:id]
     @certificate.update_attributes!(certificate_params)
     flash[:notice] = "#{@certificate.name} was successfully updated."
     redirect_to certificate_path(@certificate)
   end
-
-  #def destroy
-  #  @certificate = Certificate.find(params[:id])
-  #  @certificate.destroy
-  #  flash[:notice] = "Certificate '#{@certificate.name}' deleted."
-  #  redirect_to certificates_path
-  #end
 
   private
   # Making "internal" methods private is not required, but is a common practice.

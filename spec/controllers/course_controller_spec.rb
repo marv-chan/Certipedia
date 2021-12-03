@@ -39,27 +39,11 @@ RSpec.describe CertificatesController, type: :controller do
     it ' render the index' do
       get :index
       expect(response).to render_template('index')
-    #Certificate.find_by(:school => "Cornell University").destroy
+    Certificate.find_by(:name => "NoSQL").destroy
     end
   end
 
 
-  describe 'GET edit' do
-    cert =   Certificate.create(:school => "Columbia University", :name => "NoSQL",
-                         :subject => "Computer Science", :website => "http://test.com")
-    before(:each) do
-      get :edit, id: cert.id
-    end
-
-    it 'find the cert' do
-      expect(assigns(:certificate)).to eql(cert)
-    end
-
-    it 'should render the show template' do
-      expect(response).to render_template('edit')
-    end
-    #Certificate.find_by(:school => "Columbia University").destroy
-  end
 
 
   describe 'GET new' do

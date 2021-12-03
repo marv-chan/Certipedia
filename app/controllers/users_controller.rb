@@ -3,18 +3,14 @@ class UsersController < ApplicationController
 
   def show
     uname = session[:username]
-
-
     @user = User.find(params[:id])
 
-    #print(:session)
     if @user.username != uname
       flash[:notice] = 'You do not have permission to view this page'
-      redirect_to new_session_path
+      redirect_to login_url
       return
     end
-    @certificates =  User.bookmarked_courses(@user)
-
+    @certificates =  @user.certificates
   end
 
   def index
@@ -34,7 +30,7 @@ class UsersController < ApplicationController
     if @user.empty?
       @user = User.make_new_user(user_params)
       flash[:notice] = 'User was created'
-      redirect_to new_session_path
+      redirect_to login_url
     else
       flash[:notice] = 'Username already exists'
       redirect_to new_user_path
