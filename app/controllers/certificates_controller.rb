@@ -46,6 +46,7 @@ class CertificatesController < ApplicationController
     switch = false
 
     if params[:sort]
+
       @sorted = params[:sort]
     elsif session[:sort]
       @sorted = session[:sort]
@@ -53,23 +54,33 @@ class CertificatesController < ApplicationController
     end
 
     if params[:schools]
-      @schools_to_show = params[:schools]
+      if params[:schools] == [""]
+        @schools_to_show = @all_schools
+      else
+        @schools_to_show = params[:schools]
+      end
 
     elsif session[:schools]
-      @schools_to_show = session[:schools]
-      switch = true
+       @schools_to_show = session[:schools]
+       switch = true
     else
       @schools_to_show = @all_schools
     end
 
 
     if params[:subjects]
-      @subjects_to_show = params[:subjects]
+      if params[:subjects] == [""]
+        @subjects_to_show = @all_subjects
+      else
+        @subjects_to_show = params[:subjects]
+      end
+
       #print("params")
 
     elsif session[:subjects]
+
       @subjects_to_show = session[:subjects]
-      switch = true
+#    switch = true
     #  print("session")
     else
       @subjects_to_show = @all_subjects

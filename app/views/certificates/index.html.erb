@@ -28,7 +28,7 @@
   Include Certificates from:
   <%= select_tag :schools,
                   options_from_collection_for_select(@schools,'name','name',  @schools_to_show),
-                  multiple: true%>
+                  multiple: true, :include_blank => 'Select All'%>
 
 
 
@@ -38,7 +38,7 @@
 Include Subjects:
 <%= select_tag :subjects,
                 options_from_collection_for_select(@subjects,'name','name',  @subjects_to_show),
-                multiple: true%>
+                multiple: true, :include_blank => 'Select All'%>
 <%= submit_tag 'Refresh', id: 'sub_submit', class: 'btn btn-dark btn-sm' %>
 <% end %>
 
