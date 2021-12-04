@@ -37,5 +37,8 @@ class User < ActiveRecord::Base
 
     return @user.first
   end
-
+    
+  def self.bookmarked_courses(user)
+    return false
+  end
 end

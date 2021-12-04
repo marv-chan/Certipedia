@@ -6,4 +6,9 @@ class Bookmark < ActiveRecord::Base
     @bookmark = Bookmark.create(:user_id => user.id, :certificate_id => certificate.id)
   end
 
+  def self.remove_bookmark(user, certificate)
+	  bookmark = Bookmark.find_by(:user_id => user.id, :certificate_id => certificate.id)
+	  bookmark.destroy
+  end
+
 end
