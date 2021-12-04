@@ -1,5 +1,5 @@
 class BookmarksController < ApplicationController
-  before_action :require_login, only: [:create]
+  before_action :require_login, only: [:create, :destroy]
 
   def create
     @user = User.where(username: session[:username])
@@ -18,5 +18,13 @@ class BookmarksController < ApplicationController
 
     redirect_to @certificate
   end
+  
+  def destroy
+     @user = User.where(username: session[:username])
+     @user = @user.first
+     @bookmark = Bookmark.where(user_id: @user.id, certificate_id: params[:id])
+     @bookmark.first.destroy
+     redirect_to certificate_path
+   end
 
 end
