@@ -1,6 +1,7 @@
 <!--  This file is app/views/certificates/index.html.erb -->
 <br>
 <h2>All Certificates</h2>
+
 <br>
 <style>
 .hilite{
@@ -8,29 +9,54 @@
 }
 </style>
 
+
 <table class="table col-md-12" id="certificates">
   <thead class="table-dark">
     <tr>
       <th>
-        <%= link_to 'Certificate Name', certificates_path(:sort => 'name'), id:'name_header', class:@name_header %>
+        <%= link_to 'Certificate Name', certificates_path(:sort => 'name'), id:'name_header', class:[@name_header, 'link-light', 'text-decoration-none', 'hover-eff'] %>
       </th>
       <th>School</th>
       <th>
-        <%= link_to 'Subject Area', certificates_path(:sort => 'subject'), id:'subject_header', class:@subject_header %>
+        <%= link_to 'Subject Area', certificates_path(:sort => 'subject'), id:'subject_header', class:[@subject_header, 'link-light', 'text-decoration-none', 'hover-eff'] %>
       </th>
       <th>More Information</th>
     </tr>
   </thead>
+
   <%= form_tag certificates_path, method: :get, id: 'schools_form' do %>
-  Include:
-  <% @all_schools.each do |school| %>
-    <div class="form-check  form-check-inline">
-      <%= label_tag "schools[#{school}]", school, class: 'form-check-label' %>
-      <%= check_box_tag "schools[#{school}]", "1",  @schools_to_show.include?(school), class: 'form-check-input', id: "schools_#{school}" %>
+ <%# new here %>
+  <div class="container">
+    <div class="row">
+      <div class="col-md">Include Certificates from:</div>
+      <div class="col-md">Include Subjects:</div>
+      <div class="col-md"></div>
+
     </div>
-  <% end %>
-  <%= submit_tag 'Refresh', id: 'schools_submit', class: 'btn btn-dark btn-sm' %>
+    <div class="row">
+      <div class="col-md">
+        
+        <%= select_tag :schools,
+                  options_from_collection_for_select(@schools,'name','name',  @schools_to_show),
+                  multiple: true, :include_blank => 'Select All', class: "form-select" %>
+      </div>
+      <div class="col-md">
+        
+        <%= select_tag :subjects,
+                options_from_collection_for_select(@subjects,'name','name',  @subjects_to_show),
+                multiple: true, :include_blank => 'Select All', class: "form-select"%>
+      </div>
+      <div class="col-md"><%= submit_tag 'Refresh', id: 'sub_submit', class: 'btn btn-dark btn-lg' %></div>
+    </div>
+  </div>
+
+
+
+
 <% end %>
+
+<br><br>
+<%# new here %>
 
   <tbody class="table-light">
     <% @certificates.each do |certificate| %>

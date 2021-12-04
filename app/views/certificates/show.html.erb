@@ -40,4 +40,16 @@
   <% end %>
   </li>
 
+  <p> </p>
+
+
+    <% if session[:admin] == true %>
+      <li>
+        <p id="delete">
+        <%=  link_to "Delete Certificate", certificate_path(@certificate.id), method: :delete,:class => 'btn btn-primary' %>
+        </p>
+      </li>
+    <% end %>
+
+
 </ul>
