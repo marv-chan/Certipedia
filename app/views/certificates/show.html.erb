@@ -31,11 +31,11 @@
   <li>
   <% if @bookmarked %>
     <h5>Bookmarked!</h5>
-    <%= button_to 'Unbookmark', bookmark_path(@certificate), :method => 'delete' %>
+    <%= button_to 'Unbookmark', bookmark_path(@certificate), :method => 'delete', :class => 'btn btn-dark' %>
   <% else %>
     <%= form_tag bookmarks_path, :class => 'form' do %>
       <%= text_field :bookmarks, :certificate_id, :class => 'form-control', :value =>"#{@certificate.id}", :type => 'hidden' %>
-      <%= submit_tag 'Add to Bookmarks', :class => 'btn btn-primary' %>
+      <%= submit_tag 'Add to Bookmarks', :class => 'btn btn-dark' %>
     <% end %>
   <% end %>
   </li>
