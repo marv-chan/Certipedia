@@ -25,23 +25,38 @@
   </thead>
 
   <%= form_tag certificates_path, method: :get, id: 'schools_form' do %>
-  Include Certificates from:
-  <%= select_tag :schools,
+ <%# new here %>
+  <div class="container">
+    <div class="row">
+      <div class="col-md">Include Certificates from:</div>
+      <div class="col-md">Include Subjects:</div>
+      <div class="col-md"></div>
+
+    </div>
+    <div class="row">
+      <div class="col-md">
+        
+        <%= select_tag :schools,
                   options_from_collection_for_select(@schools,'name','name',  @schools_to_show),
-                  multiple: true, :include_blank => 'Select All'%>
-
-
-
-
-
-
-Include Subjects:
-<%= select_tag :subjects,
+                  multiple: true, :include_blank => 'Select All', class: "form-select" %>
+      </div>
+      <div class="col-md">
+        
+        <%= select_tag :subjects,
                 options_from_collection_for_select(@subjects,'name','name',  @subjects_to_show),
-                multiple: true, :include_blank => 'Select All'%>
-<%= submit_tag 'Refresh', id: 'sub_submit', class: 'btn btn-dark btn-sm' %>
+                multiple: true, :include_blank => 'Select All', class: "form-select"%>
+      </div>
+      <div class="col-md"><%= submit_tag 'Refresh', id: 'sub_submit', class: 'btn btn-dark btn-lg' %></div>
+    </div>
+  </div>
+
+
+
+
 <% end %>
 
+<br><br>
+<%# new here %>
 
   <tbody class="table-light">
     <% @certificates.each do |certificate| %>
