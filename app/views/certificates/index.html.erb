@@ -14,11 +14,11 @@
   <thead class="table-dark">
     <tr>
       <th>
-        <%= link_to 'Certificate Name', certificates_path(:sort => 'name'), id:'name_header', class:@name_header %>
+        <%= link_to 'Certificate Name', certificates_path(:sort => 'name'), id:'name_header', class:[@name_header, 'link-light', 'text-decoration-none', 'hover-eff'] %>
       </th>
       <th>School</th>
       <th>
-        <%= link_to 'Subject Area', certificates_path(:sort => 'subject'), id:'subject_header', class:@subject_header %>
+        <%= link_to 'Subject Area', certificates_path(:sort => 'subject'), id:'subject_header', class:[@subject_header, 'link-light', 'text-decoration-none', 'hover-eff'] %>
       </th>
       <th>More Information</th>
     </tr>
