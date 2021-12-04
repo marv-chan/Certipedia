@@ -21,8 +21,7 @@ class BookmarksController < ApplicationController
   def destroy
     @user = User.where(username: session[:username])
     @user = @user.first
-    @certificate = Certificate.find_by(params[:id])
-    @bookmark = Bookmark.where(user_id: @user.id, certificate_id: @certificate.id)
+    @bookmark = Bookmark.where(user_id: @user.id, certificate_id: params[:id])
     @bookmark.first.destroy
     redirect_to certificate_path
   end
