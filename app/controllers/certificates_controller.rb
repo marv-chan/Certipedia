@@ -110,6 +110,8 @@ class CertificatesController < ApplicationController
     @name_header = (params[:sort] == 'name') ? "hilite" : ""
 
     @subject_header = (params[:sort] == 'subject') ? "hilite" : ""
+    
+    @school_header = (params[:sort] == 'school') ? "hilite" : ""
   end
 
   def new
