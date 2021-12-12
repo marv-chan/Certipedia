@@ -37,4 +37,15 @@ Scenario: sorted by subject
   Then I should see "Data Science" before "Public Policy"
   Then I should see "Public Policy" before "Russian Literature"
 
+Scenario: sorted by subject 
+  # enter step(s) to check the 'PG' and 'R' checkboxes
+  # enter step(s) to uncheck all other checkboxes
+  # enter step to "submit" the search form on the homepage
+  # enter step(s) to ensure that PG and R movies are visible
+  # enter step(s) to ensure that other movies are not visible
+  Given I am on home page
+  When I follow "School"
+  Then I should see "Networking" before "Gogol"
+  Then I should see "SQL" before "Urban Planning"
+  
 
