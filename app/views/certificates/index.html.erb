@@ -7,8 +7,24 @@
 .hilite{
   background-color: grey;
 }
+
+.bold{
+  font-weight: bold;
+}
 </style>
 
+<%= form_tag certificates_path, method: :get, id: 'schools_form' do %>
+  <b>
+    <label for="schools">Schools</label>
+  </b>
+  <%= select_tag 'schools', options_for_select(@all_schools, @selected_schools), multiple: true, class: 'selectpicker'%>
+  <b>
+  <label for="schools">Subjects</label>
+  </b>
+  <%= select_tag 'subjects', options_for_select(@all_subjects, @selected_subjects), multiple: true, class: 'selectpicker'%>
+  <%= hidden_field_tag :refresh, "1" %>
+  <%= submit_tag 'Refresh', id: 'sub_submit', class: 'btn btn-dark btn-sm' %>
+<% end %>
 
 <table class="table col-md-12" id="certificates">
   <thead class="table-dark">
@@ -23,37 +39,6 @@
       <th>More Information</th>
     </tr>
   </thead>
-
-  <%= form_tag certificates_path, method: :get, id: 'schools_form' do %>
- <%# new here %>
-  <div class="container">
-    <div class="row">
-      <div class="col-md">Include Certificates from:</div>
-      <div class="col-md">Include Subjects:</div>
-      <div class="col-md"></div>
-
-    </div>
-    <div class="row">
-      <div class="col-md">
-        
-        <%= select_tag :schools,
-                  options_from_collection_for_select(@schools,'name','name',  @schools_to_show),
-                  multiple: true, :include_blank => 'Select All', class: "form-select" %>
-      </div>
-      <div class="col-md">
-        
-        <%= select_tag :subjects,
-                options_from_collection_for_select(@subjects,'name','name',  @subjects_to_show),
-                multiple: true, :include_blank => 'Select All', class: "form-select"%>
-      </div>
-      <div class="col-md"><%= submit_tag 'Refresh', id: 'sub_submit', class: 'btn btn-dark btn-lg' %></div>
-    </div>
-  </div>
-
-
-
-
-<% end %>
 
 <br><br>
 <%# new here %>

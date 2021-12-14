@@ -14,7 +14,6 @@ class Certificate < ActiveRecord::Base
 
   def self.all_schools
     return Certificate.select(:school).map(&:school).uniq
-    return all_schools
   end
 
   def self.all_subjects

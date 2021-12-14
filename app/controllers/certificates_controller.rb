@@ -25,93 +25,57 @@ class CertificatesController < ApplicationController
   def index
 
     @all_schools = Certificate.all_schools
-    @schools = Array.new(3)
-    i = 0
-    @all_schools.each do |s|
-      @schools[i] = Schools.new(s,i)
-      i = i + 1
-    end
-
     @all_subjects = Certificate.all_subjects
+    @selected_schools = []
+    @selected_subjects = []
+    @sort = nil
 
+    if params[:refresh] == nil and params[:sort] == nil
+      session[:subjects] = nil
+      session[:schools] = nil
+      session[:sort] = nil
+      @certificates = Certificate.with_filter([], [])
+      return
+    elsif params[:refresh] != nil
 
-    @subjects = Array.new(2)
-    i = 0
-    @all_subjects.each do |s|
-      @subjects[i] = Subjects.new(s,i)
-      i = i + 1
-    end
-
-
-    switch = false
-
-    if params[:sort]
-
-      @sorted = params[:sort]
-    elsif session[:sort]
-      @sorted = session[:sort]
-      switch = true
-    end
-
-    if params[:schools]
-      if params[:schools] == [""]
-        @schools_to_show = @all_schools
+      if params[:schools] != nil
+        @selected_schools = params[:schools]
+        session[:schools] = @selected_schools
       else
-        @schools_to_show = params[:schools]
+        session[:schools] = []
       end
 
-    elsif session[:schools]
-       @schools_to_show = session[:schools]
-       switch = true
-    else
-      @schools_to_show = @all_schools
-    end
-
-
-    if params[:subjects]
-      if params[:subjects] == [""]
-        @subjects_to_show = @all_subjects
+      if params[:subjects] != nil
+        @selected_subjects = params[:subjects]
+        session[:subjects] = @selected_subjects
       else
-        @subjects_to_show = params[:subjects]
+        session[:subjects] = []
       end
 
-      #print("params")
+      if session[:sort] != nil
+        @sort = session[:sort]
+      end
 
-    elsif session[:subjects]
-
-      @subjects_to_show = session[:subjects]
-#    switch = true
-    #  print("session")
-    else
-      @subjects_to_show = @all_subjects
-  #    print("recovered from hash")
-    end
-  #  print(@subjects_to_show)
-  #  print("printing session")
-  #  print(session[:subjects])
-
-    if switch
-      redirect_to certificates_path(:sort => @sorted, :schools => @schools_to_show,:subjects => @subjects_to_show)
-    end
-
-    @certificates = Certificate.with_filter(@schools_to_show,@subjects_to_show)
-    if @sorted
-      @certificates = Certificate.with_filter(@schools_to_show,@subjects_to_show).order(@sorted)
-    end
-
-    session[:sort] = @sorted
-    session[:schools] = @schools_to_show
-
-    session[:subjects] = @subjects_to_show
-
-
-
-
-    @name_header = (params[:sort] == 'name') ? "hilite" : ""
-
-    @subject_header = (params[:sort] == 'subject') ? "hilite" : ""
+    elsif params[:sort] != nil
+      print("in sort\n")
     
-    @school_header = (params[:sort] == 'school') ? "hilite" : ""
+      if session[:schools] != nil
+        @selected_schools = session[:schools]
+      end
+
+      if session[:subjects] != nil
+        @selected_subjects = session[:subjects]
+      end
+
+      @sort = params[:sort]
+      session[:sort] = @sort
+    end
+
+    @certificates = Certificate.with_filter(@selected_schools, @selected_subjects).order(@sort)
+
+    @name_header = (@sort == 'name') ? "hilite" : ""
+    @subject_header = (@sort == 'subject') ? "hilite" : ""
+    @school_header = (@sort == 'school') ? "hilite" : ""
   end
 
   def new
