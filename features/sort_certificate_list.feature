@@ -37,7 +37,7 @@ Scenario: sorted by subject
   Then I should see "Data Science" before "Public Policy"
   Then I should see "Public Policy" before "Russian Literature"
 
-Scenario: sorted by subject 
+Scenario: sorted by school 
   # enter step(s) to check the 'PG' and 'R' checkboxes
   # enter step(s) to uncheck all other checkboxes
   # enter step to "submit" the search form on the homepage
