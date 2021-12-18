@@ -12,6 +12,17 @@ RSpec.describe UsersController, type: :controller do
       get :create, {:user => {:name => "Marvin", :username => "test2",
                     :password => "password2"}}
       expect(flash[:notice]).to match(/User was created/)
+      expect(response).to redirect_to('/login')
+
+    end
+
+    it 'user with existing username' do
+      get :create, {:user => {:name => "Marvin", :username => "test2",
+                    :password => "password2"}}
+      get :create, {:user => {:name => "Marvin", :username => "test2",
+                    :password => "password2"}}
+      expect(flash[:notice]).to match(/Username already exists/)
+      expect(response).to redirect_to('/users/new')
 
     end
   end
@@ -24,7 +35,7 @@ RSpec.describe UsersController, type: :controller do
     it ' rendirect to show' do
       get :index
       expect(response).to redirect_to('/users/new')
-  #  User.find_by(:name => "Alexander").destroy
+
     end
   end
 
@@ -40,33 +51,27 @@ RSpec.describe UsersController, type: :controller do
   end
 
 
-  describe 'GET show' do
+  describe 'GET show on self' do
 
-  user = User.create(:name => "Alex", :username => "new",
-                :password => "password5")
+    user = User.create(:name => "Alex", :username => "new",
+                  :password => "password5")
 
-  before(:each) do
-    get :show, {id: user.id}, {username: user.username}
+    before(:each) do
+      get :show, {id: user.id}, {username: user.username}
+    end
+
+    it 'should find the user' do
+
+      expect(assigns(:user)).to eql(user)
+    end
+
+    it 'render show' do
+      expect(response).to render_template('show')
+    end
   end
 
 
 
-  it 'should find the user' do
-
-    expect(assigns(:user)).to eql(user)
-  end
-
-  it 'render show' do
-    expect(response).to render_template('show')
-  end
-end
-
-  after(:all) do
-
-    User.all.each {|user|
-      user.destroy
-  }
-  end
 
 
 

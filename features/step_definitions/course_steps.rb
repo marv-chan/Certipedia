@@ -6,7 +6,7 @@ Given /the following certificates exist/ do |course_table|
 end
 
 When /I (un)?check the following schools: (.*)/ do |uncheck, school_list|
-  list = school_list.split(', ') 
+  list = school_list.split(', ')
   list.each do |element|
 	  if(uncheck)
 		 uncheck("schools_"+element)
@@ -24,4 +24,8 @@ end
 
 Then /(.*) seed certificates should exist/ do | n_seeds |
   Certificate.count.should be n_seeds.to_i
+end
+
+Given /Given I log in as admin/ do
+   
 end

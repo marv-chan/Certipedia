@@ -18,12 +18,13 @@ class BookmarksController < ApplicationController
 
     redirect_to @certificate
   end
-  
+
   def destroy
      @user = User.where(username: session[:username])
      @user = @user.first
      @bookmark = Bookmark.where(user_id: @user.id, certificate_id: params[:id])
      @bookmark.first.destroy
+     flash[:notice] = 'Bookmark Removed.'
      redirect_to certificate_path
    end
 
