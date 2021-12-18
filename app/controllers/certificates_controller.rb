@@ -96,6 +96,7 @@ class CertificatesController < ApplicationController
 
   def update
     if session[:admin] == nil
+      @certificate = Certificate.find params[:id]
       flash[:notice] = "You don't have permission to update certificate"
       redirect_to certificate_path(@certificate)
       return
