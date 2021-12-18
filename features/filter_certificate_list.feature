@@ -1,7 +1,7 @@
 Feature: display list of certificates filtered by school
- 
+
   As a prospective student
-  So that I can find courses from the universities I'm interested in 
+  So that I can find courses from the universities I'm interested in
   I want to see certificates matching only certain universities
 
 Background: courses in database
@@ -20,8 +20,10 @@ Scenario: restrict to certificates with "New York University" and "Cornell Unive
   # enter step(s) to ensure that PG and R movies are visible
   # enter step(s) to ensure that other movies are not visible
   Given I am on home page
-  When I check the following schools: New York University, Cornell University
-  When I uncheck the following schools: Columbia University
+  #When I check the following schools: New York University, Cornell University
+  When I select "New York University" from "schools"
+  When I select "Cornell University" from "schools"
+  When I unselect "Columbia University" from "schools"
   When I press "Refresh"
   Then I should see "Urban Planning"
   Then I should see "Gogol"

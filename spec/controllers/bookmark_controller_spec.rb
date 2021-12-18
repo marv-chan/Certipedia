@@ -6,8 +6,6 @@ RSpec.describe BookmarksController, type: :controller do
 
   describe 'GET new' do
 
-
-
     it 'routes to bookmarks new' do
       expect(:get => "/certificates/1/bookmarks/new" )
       route_to controller: "bookmarks",
@@ -45,5 +43,22 @@ RSpec.describe BookmarksController, type: :controller do
 
     end
   end
+
+  describe 'GET destroy' do
+    it 'destroys bookmark' do
+      cert =   Certificate.create(:school => "Cornell University", :name => "NoSQL",
+                           :subject => "Computer Science", :website => "http://test.com")
+      user = User.create(:name => "Alexander", :username => "bookmark_user",
+                   :password => "password1")
+
+
+      get :create, {bookmarks: {certificate_id: cert.id}},{username: user.username}
+
+      get :destroy , {id: cert.id},{username: user.username}
+      expect(flash[:notice]).to match(/Bookmark Removed./)
+    end
+
+    end
+
 
 end

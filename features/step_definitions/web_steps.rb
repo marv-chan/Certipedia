@@ -86,6 +86,13 @@ When /^(?:|I )select "([^"]*)" from "([^"]*)"$/ do |value, field|
   select(value, :from => field)
 end
 
+
+When(/^I unselect "([^"]*)" from "([^"]*)"$/) do |value, field|
+  unselect(value, :from => field)
+end
+
+
+
 When /^(?:|I )check "([^"]*)"$/ do |field|
   check(field)
 end
