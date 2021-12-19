@@ -19,5 +19,18 @@ Scenario: view certificate information
   And I follow "More about SQL"
   Then I should see "Data Science"
   Then I should see "Columbia University"
-  Then I should see "https://test.com"
-  Then I should see "https://www.columbia.edu"
+  Then I should see "Learn more about the school here"
+
+Scenario: view certificate information
+  Given I am on home page
+  And I follow "More about Urban Planning"
+  Then I should see "Public Policy"
+  Then I should see "New York University"
+  Then I should see "Learn more about the school here"
+  
+Scenario: view certificate information
+  Given I am on home page
+  And I follow "More about Gogol"
+  Then I should see "Russian Literature"
+  Then I should see "Cornell University"
+  Then I should see "Learn more about the school here"
