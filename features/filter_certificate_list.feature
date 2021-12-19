@@ -29,3 +29,12 @@ Scenario: restrict to certificates with "New York University" and "Cornell Unive
   Then I should see "Gogol"
   Then I should not see "SQL"
   Then I should not see "Networking"
+
+Scenario: restrict to certificates with "Computer Science"
+  Given I am on home page
+  When I select "Computer Science" from "subjects"
+  When I press "Refresh"
+  Then I should see "Networking"
+  Then I should not see "Urban Planning"
+  Then I should not see "Gogol"
+  Then I should not see "SQL"
